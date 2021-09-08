@@ -4,8 +4,14 @@
   "main": "src/pages/index.njk",
   "scripts": {
     "build:eleventy": "eleventy --config config/eleventy.js",
+    "build:styles": "sass src/styles/index.scss:public/styles/index.scss",
+    "build:svg": "svgo -f src/media/svg -o public/media/svg -r --config config/svgo.js",
+    "build:img": "imagemin src/media/img/* --out-dir=public/media/img --plugin=pngquant --plugin=mozjpeg --plugin=pngcrush --plugin=zopfli",
     "build": "npm-run-all --parallel build:*",
     "start:eleventy": "eleventy --config config/eleventy.js --serve",
+    "start:styles": "chokidar src/styles/**/*.scss -c \"npm run build:styles\"",
+    "start:svg": "chokidar src/media/svg/**/*.svg -c \"npm run build:svg\"",
+    "start:img": "chokidar src/media/img/**/*.* -c \"npm run build:img\"",
     "start": "npm-run-all --parallel build:* start:*"
   },
   "keywords": [],
@@ -13,6 +19,16 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "npm-run-all": "^4.1.5"
+    "chokidar-cli": "^3.0.0",
+    "imagemin-cli": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngcrush": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-zopfli": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.56.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.39.0",
+    "svgo": "^2.5.0"
   }
 }
