@@ -1,0 +1,25 @@
+---
+title: Template Eleventy
+layout: 'base.njk'
+---
+<section class="section">
+  <h2>Items</h2>
+  <ul>
+    {% for item in items %}
+    <li>
+      <article class="section-article">
+        <a href="/items/{{ item.nombre | slug }}">
+          <h3>{{ item.nombre }}</h3>
+        </a>
+        <img 
+          src="{{ item.img }}" 
+          alt="{{ item.nombre }}"
+        >
+        <p>
+          {{ item.descripcion }}
+        </p>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
